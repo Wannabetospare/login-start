@@ -16,13 +16,12 @@ import java.util.concurrent.ConcurrentHashMap;
 @Component
 public class SessionManager {
 
-    public static final String SESSION_COOKIE_NAME = "mySessionId";
+    public static final String SESSION_COOKIE_NAME = "mySessionId"; // String 상수 선언
 
-    private Map<String, Object> sessionStore = new ConcurrentHashMap<>();
+    private Map<String, Object> sessionStore = new ConcurrentHashMap<>(); // 컨커런트 해쉬맵 사용
 
 
     // 세션 생성
-
     public void createSession(Object value, HttpServletResponse response) {
 
         //세션 id를 생성하고, 값을 세션에 저장

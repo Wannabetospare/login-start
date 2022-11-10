@@ -29,6 +29,12 @@ public class LoginController {
     private final SessionManager sessionManager;
 
 
+    // 매핑 종류 - GET
+    // 매핑 주소 - login
+    // 이름 - loginForm
+    // 매개변수 - LoginForm
+    // 동작 - x
+    // 반환 - 주소
     @GetMapping("/login")
     public String loginForm(@ModelAttribute("loginForm") LoginForm form) {
         return "login/loginForm";
@@ -36,13 +42,11 @@ public class LoginController {
 
 
     // @PostMapping("/login")
-    public String login(@Valid @ModelAttribute LoginForm form, BindingResult
-            bindingResult, HttpServletResponse response) {
+    public String login(@Valid @ModelAttribute LoginForm form, BindingResult bindingResult, HttpServletResponse response) {
         if (bindingResult.hasErrors()) {
             return "login/loginForm";
         }
-        Member loginMember = loginService.login(form.getLoginId(),
-                form.getPassword());
+        Member loginMember = loginService.login(form.getLoginId(), form.getPassword());
         log.info("login? {}", loginMember);
         if (loginMember == null) {
             bindingResult.reject("loginFail", "아이디 또는 비밀번호가 맞지 않습니다.");
@@ -58,13 +62,11 @@ public class LoginController {
     }
 
     //@PostMapping("/login")
-    public String loginV2(@Valid @ModelAttribute LoginForm form, BindingResult
-            bindingResult, HttpServletResponse response) {
+    public String loginV2(@Valid @ModelAttribute LoginForm form, BindingResult bindingResult, HttpServletResponse response) {
         if (bindingResult.hasErrors()) {
             return "login/loginForm";
         }
-        Member loginMember = loginService.login(form.getLoginId(),
-                form.getPassword());
+        Member loginMember = loginService.login(form.getLoginId(), form.getPassword());
         log.info("login? {}", loginMember);
         if (loginMember == null) {
             bindingResult.reject("loginFail", "아이디 또는 비밀번호가 맞지 않습니다.");
@@ -86,8 +88,7 @@ public class LoginController {
         }
 
 
-        Member loginMember = loginService.login(form.getLoginId(),
-                form.getPassword());
+        Member loginMember = loginService.login(form.getLoginId(), form.getPassword());
         log.info("login? {}", loginMember);
 
         if (loginMember == null) {
@@ -96,11 +97,10 @@ public class LoginController {
         }
 
 
-        //로그인 성공 처리
+        // 로그인 성공 처리
         // 세션이 있으면 있는 세션 반환, 없으면 신규 세션 생성
         HttpSession session = request.getSession(); //세션에 로그인 회원 정보 보관
         session.setAttribute(SessionConst.LOGIN_MEMBER, loginMember);
-
         return "redirect:/";
     }
 
@@ -120,7 +120,9 @@ public class LoginController {
     public String logoutV3(HttpServletRequest request) {
 
         //세션을 삭제한다.
-        HttpSession session = request.getSession(false); if (session != null) {
+        HttpSession session = request.getSession(false);
+        if (session != null) {
+            // 세션을 제거한다.
             session.invalidate();
         }
         return "redirect:/";

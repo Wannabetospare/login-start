@@ -13,7 +13,8 @@ class SessionManagerTest {
     @Test
     void sessionTest() {
 
-        //세션 생성
+        // 세션 생성
+        // Mock 라이브러리로 테스트용 response 생성
         MockHttpServletResponse response = new MockHttpServletResponse();
         Member member = new Member();
         sessionManager.createSession(member, response);
