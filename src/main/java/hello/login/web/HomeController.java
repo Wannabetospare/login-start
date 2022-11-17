@@ -98,6 +98,8 @@ public class HomeController {
         return "loginHome";
     }
 
+
+    // @Login 하나만 써주면 로그인 검증을 알아서 한다. - 직접 만든 어노테이션
     @GetMapping("/")
     public String homeLoginV3ArgumentResolver(@Login Member loginMember, Model model) {
 

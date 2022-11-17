@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+// 인증체크 기능 인터셉터
 @Slf4j
 public class LoginCheckInterceptor implements HandlerInterceptor {
 
@@ -21,11 +22,13 @@ public class LoginCheckInterceptor implements HandlerInterceptor {
         HttpSession session = request.getSession(false);
 
 
+        // 세션이 비어있거나, 로그인의 세션상수가 비어있으면
         if (session == null || session.getAttribute(SessionConst.LOGIN_MEMBER) == null) {
             log.info("미인증 사용자 요청");
 
             //로그인으로 redirect
-            response.sendRedirect("/login?redirectURL=" + requestURI); return false;
+            response.sendRedirect("/login?redirectURL=" + requestURI);
+            return false;
         }
 
         return true;
